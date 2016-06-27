@@ -99,6 +99,11 @@ export default class Scrollable {
     // check if content is scrollbar is longer than content
     let handleSize = scrollbarRatio > 1 ? 0 : Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
 
+    // check if handleSize is required and it is too small
+    if (handleSize < 10 && handleSize !== 0) {
+      handleSize = 10;
+    }
+
     this.updateHandle(handleOffset, handleSize);
    }
 
