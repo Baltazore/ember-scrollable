@@ -96,12 +96,13 @@ export default class Scrollable {
     // Offset of 2px allows for a small top/bottom or left/right margin around handle.
     let handleOffset = Math.round(scrollbarRatio * scrollOffset) + 2;
 
-    // check if content is scrollbar is longer than content
-    let handleSize = scrollbarRatio > 1 ? 0 : Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
+    let handleSize = 0;
 
-    // check if handleSize is required and it is too small
-    if (handleSize < 10 && handleSize !== 0) {
-      handleSize = 10;
+    // check if content is scrollbar is longer than content
+    if (scrollbarRatio < 1) {
+      let handleSizeCalculated = Math.floor(scrollbarRatio * (scrollbarSize - 2)) - 2;
+      // check if handleSize is too small
+      handleSize = handleSizeCalculated < 10 ? 10 : handleSizeCalculated;
     }
 
     this.updateHandle(handleOffset, handleSize);
